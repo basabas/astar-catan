@@ -7,12 +7,12 @@ namespace Bas.Catan.PathFinding
 	public class AStar
 	{
 		private readonly HashSet<IAStarNode> _closed;
-		private readonly Heap<IAStarNode> _open;
 		private readonly Dictionary<IAStarNode, IAStarNode> _cameFrom;
 		private readonly Dictionary<IAStarNode, float> _gScore;
 		private readonly Dictionary<IAStarNode, float> _hScore;
 		private readonly Dictionary<IAStarNode, float> _fScore;
 		private readonly OpenSorter _sorter;
+		private readonly Heap<IAStarNode> _open;
 
 		public AStar()
 		{

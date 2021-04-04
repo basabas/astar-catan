@@ -1,4 +1,5 @@
 ﻿using Bas.Catan.World;
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,8 +8,7 @@ namespace Bas.Catan.UI
 {
 	public class WorldInformationDropdown : Dropdown
 	{
-		public delegate void DropdownChanged(WorldInformation worldInformation);
-		public event DropdownChanged OnDropdownChanged;
+		public event Action<WorldInformation> OnDropdownChanged;
 
 		public WorldInformation Current => _worldInformationObjects[value];
 

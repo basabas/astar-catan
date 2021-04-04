@@ -13,7 +13,7 @@ namespace Bas.Catan.World.Editor
 		private SerializedProperty _cameraPosition;
 		private SerializedProperty _cameraRotation;
 
-		private ReorderableList nodesList;
+		private ReorderableList _nodesList;
 
 		private void OnEnable()
 		{
@@ -23,7 +23,7 @@ namespace Bas.Catan.World.Editor
 			_cameraPosition = serializedObject.FindProperty("_cameraPosition");
 			_cameraRotation = serializedObject.FindProperty("_cameraRotation");
 
-			nodesList = new ReorderableList(serializedObject, serializedObject.FindProperty("_nodes"), true, true, true, true)
+			_nodesList = new ReorderableList(serializedObject, serializedObject.FindProperty("_nodes"), true, true, true, true)
 			{
 				drawHeaderCallback = (rect) => EditorGUI.LabelField(rect, "Nodes", EditorStyles.boldLabel),
 				drawElementCallback = DrawNodesElement
@@ -33,7 +33,7 @@ namespace Bas.Catan.World.Editor
 		private void DrawNodesElement(Rect rect, int index, bool isActive, bool isFocused)
 		{
 			const float typeWidth = 75;
-			SerializedProperty element = nodesList.serializedProperty.GetArrayElementAtIndex(index);
+			SerializedProperty element = _nodesList.serializedProperty.GetArrayElementAtIndex(index);
 			rect.y += 1;
 			EditorGUI.PropertyField(new Rect(rect.x, rect.y, typeWidth, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("NodeType"), GUIContent.none);
 			EditorGUI.PropertyField(new Rect(rect.x + typeWidth, rect.y, rect.width - typeWidth, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("TravelCost"));
@@ -53,7 +53,7 @@ namespace Bas.Catan.World.Editor
 			EditorGUILayout.PropertyField(_cameraRotation);
 
 			EditorGUILayout.Space();
-			nodesList.DoLayoutList();
+			_nodesList.DoLayoutList();
 
 			serializedObject.ApplyModifiedProperties();
 		}

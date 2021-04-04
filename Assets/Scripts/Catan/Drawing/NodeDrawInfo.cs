@@ -7,7 +7,7 @@ namespace Bas.Catan.Drawing
 	public struct NodeDrawInfo
 	{
 		/// <summary>Size that a <see cref="NodeDrawInfo"/> object is in memory</summary>
-		public static int Size => 16;
+		public const int Size = 16;
 
 		public float X;
 		public float Y;
