@@ -5,6 +5,7 @@ using Bas.Catan.PathFinding;
 using Bas.Catan.UI;
 using Bas.Catan.World;
 using UnityEngine;
+using UnityEngine.UI;
 using Stopwatch = System.Diagnostics.Stopwatch;
 
 namespace Bas.Catan
@@ -15,6 +16,7 @@ namespace Bas.Catan
 		[SerializeField] private PathFinder _pathFinder;
 		[SerializeField] private NodeSelector _nodeSelector;
 		[SerializeField] private WorldDrawer _nodeDrawer;
+		[SerializeField] private Text resultText;
 
 		private WorldBuilder _builder;
 
@@ -49,7 +51,9 @@ namespace Bas.Catan
 
                 if (result.Count > 2)
                 {
+					stopwatch.Stop();
                     result.ForEach(node => node.HighLight());
+                    resultText.text = $"{stopwatch.Elapsed}";
                     Debug.Log($"Getting path using {(_pathFinder.ImprovedAStart ? "Improved AStar" : "Base AStar")}, path cost is: {TotalCost(result)}, took {stopwatch.Elapsed}");
                 }
                 else
