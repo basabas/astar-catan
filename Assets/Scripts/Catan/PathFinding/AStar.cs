@@ -58,8 +58,12 @@ namespace Bas.Catan.PathFinding
 
 					foreach(IAStarNode neighbour in current.Neighbours)
 					{
+						if (_closed.Contains(neighbour))
+						{
+							continue;
+						}
                         tentativeGScore = _gScore[current] + current.CostTo(neighbour);
-                        if (!_gScore.ContainsKey(neighbour) || tentativeGScore < _gScore[neighbour])
+                        if (!_gScore.TryGetValue(neighbour, out float neighborGScore) || tentativeGScore < neighborGScore)
                         {
                             _cameFrom[neighbour] = current;
 							float hScore = neighbour.EstimatedCostTo(goal);

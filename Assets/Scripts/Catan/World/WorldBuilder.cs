@@ -12,11 +12,11 @@ namespace Bas.Catan.World
 
 			for(int x = 0; x < nodes.GetLength(0); x++)
 			{
-				for(int z = 0; z < nodes.GetLength(1); z++)
+				for(int y = 0; y < nodes.GetLength(1); y++)
 				{
 					NodeInfo nodeInfo = worldInformation.Nodes[Random.Range(0, worldInformation.Nodes.Count)];
-					Vector2Int nodeIndex = new Vector2Int(x, z);
-					nodes[x, z] = new AStarNode(nodeInfo, nodeIndex, new NeighbourNodeCollection(nodes, nodeIndex));
+					Vector2Int nodeIndex = new Vector2Int(x, y);
+					nodes[x, y] = new AStarNode(nodeInfo, nodeIndex, new NeighbourNodeCollection(nodes, nodeIndex));
 				}
 			}
 

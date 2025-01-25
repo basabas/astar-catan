@@ -23,12 +23,12 @@ namespace Bas.Catan.Utilities
 			return false;
 		}
 
-		public static Vector3 ToNodePosition(this Vector2Int index, WorldInformation worldInfo)
+		public static Vector2 ToNodePosition(this Vector2Int index, WorldInformation worldInfo)
 		{
 			Vector2 halfWorldSize = (worldInfo.WorldSize - Vector2.one) / 2f;
 			float xPos = (index.x - halfWorldSize.x + index.y % 2 * 0.5f) * worldInfo.DistanceBetweenNodes.x;
-			float zPos = (index.y - halfWorldSize.y) * worldInfo.DistanceBetweenNodes.y;
-			return new Vector3(xPos, 0, zPos);
+			float yPos = (index.y - halfWorldSize.y) * worldInfo.DistanceBetweenNodes.y;
+			return new Vector2(xPos, yPos);
 		}
 
 		public static Vector2Int ToNodeIndex(this Vector3 position, WorldInformation worldInfo)
