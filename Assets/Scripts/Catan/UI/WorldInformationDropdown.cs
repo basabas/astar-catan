@@ -8,7 +8,7 @@ namespace Bas.Catan.UI
 {
 	public class WorldInformationDropdown : Dropdown
 	{
-		public event Action<WorldInformation> OnDropdownChanged;
+		public event Action<WorldInformation> OnDropdownChanged = delegate { };
 
 		public WorldInformation Current => _worldInformationObjects[value];
 
@@ -17,7 +17,7 @@ namespace Bas.Catan.UI
 		protected override void Awake()
 		{
 			base.Awake();
-			onValueChanged.AddListener(newIndex => OnDropdownChanged(Current));
+			onValueChanged.AddListener(_ => OnDropdownChanged(Current));
 		}
 
 #if UNITY_EDITOR

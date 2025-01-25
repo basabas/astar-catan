@@ -43,7 +43,7 @@ namespace Bas.Catan.PathFinding
 				_fScore.Add(start, _hScore[start]);
 				_open.Push(start);
 
-				IAStarNode current = null;
+				IAStarNode current;
 				float tentativeGScore;
 
 				while(_open.Count > 0)

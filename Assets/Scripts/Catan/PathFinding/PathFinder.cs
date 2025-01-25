@@ -13,7 +13,7 @@ namespace Bas.Catan.PathFinding
 
         [SerializeField] private Toggle _improvedAStarToggle;
 
-		private readonly AStar _astar = new AStar();
+		private readonly AStar _aStar = new AStar();
 		private readonly List<AStarNode> _result = new List<AStarNode>();
 
 		public List<AStarNode> FindPath(AStarNode start, AStarNode end)
@@ -29,14 +29,14 @@ namespace Bas.Catan.PathFinding
             return Enumerable.Empty<AStarNode>().ToList();
         }
 
-		private bool TryGetPath(AStarNode start, AStarNode end, out IList<IAStarNode> astarResult)
+		private bool TryGetPath(AStarNode start, AStarNode end, out IList<IAStarNode> aStarResult)
 		{
 			if(_improvedAStarToggle.isOn)
 			{
-				return _astar.TryGetPath(start, end, out astarResult);
+				return _aStar.TryGetPath(start, end, out aStarResult);
 			}
-			astarResult = Pathing.AStar.GetPath(start, end);
-			return astarResult != null;
+			aStarResult = Pathing.AStar.GetPath(start, end);
+			return aStarResult != null;
 		}
 
 		public void Clear()

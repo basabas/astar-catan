@@ -34,14 +34,13 @@ namespace Bas.Catan
 		{
 			Stopwatch stopwatch = Stopwatch.StartNew();
 			_world = _builder.BuildWorld(information);
-			Debug.Log($"Building world took {stopwatch.ElapsedMilliseconds} ms.");
+			Debug.Log($"Building world took {stopwatch.Elapsed}");
 			_nodeSelector.SetWorld(_world);
 			_pathFinder.Clear();
 		}
 
 		public void FindPath()
         {
-            Debug.LogError("Finding Path..");
 			if(_nodeSelector.TryGetStartAndEnd(out AStarNode start, out AStarNode end))
 			{
 				Stopwatch stopwatch = Stopwatch.StartNew();
@@ -51,7 +50,7 @@ namespace Bas.Catan
                 if (result.Count > 2)
                 {
                     result.ForEach(node => node.HighLight());
-                    Debug.Log($"Getting path using {(_pathFinder.ImprovedAStart ? "Improved AStar" : "Base AStar")}, path cost is: {TotalCost(result)}, took {stopwatch.ElapsedMilliseconds} ms.");
+                    Debug.Log($"Getting path using {(_pathFinder.ImprovedAStart ? "Improved AStar" : "Base AStar")}, path cost is: {TotalCost(result)}, took {stopwatch.Elapsed}");
                 }
                 else
                 {

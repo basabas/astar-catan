@@ -38,7 +38,7 @@ namespace Bas.Catan.NodeSelecting
 
 		private void OnClickEvent(Vector2 screenPosition)
 		{
-			if(TryGetAstarNode(_camera.ScreenPointToRay(screenPosition), out AStarNode node))
+			if(TryGetAStarNode(_camera.ScreenPointToRay(screenPosition), out AStarNode node))
 			{
 				if(_findStart)
 				{
@@ -64,7 +64,7 @@ namespace Bas.Catan.NodeSelecting
 			_endSelectButton.interactable = findStart;
 		}
 
-		private bool TryGetAstarNode(Ray ray, out AStarNode node)
+		private bool TryGetAStarNode(Ray ray, out AStarNode node)
 		{
 			node = null;
 			if(VectorUtilities.TryGetPlaneIntersection(ray, new Vector3(0, 0.2f, 0), Vector3.up, out Vector3 point))

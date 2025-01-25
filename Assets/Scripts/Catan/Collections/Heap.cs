@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Bas.Catan.Collections
 {
@@ -22,6 +21,7 @@ namespace Bas.Catan.Collections
 		/// Create a new heap.
 		/// </summary>
 		/// <param name="minSize">The minimum number of elements the heap is expected to hold.</param>
+		/// <param name="comparer">Comparer</param>
 		/// <param name="isMaxHeap">If "true", this is a Max Heap, where the largest values rise to the top. Otherwise, this is a Min Heap.</param>
 		public Heap(int minSize = 1024, IComparer<T> comparer = null, bool isMaxHeap = false)
 		{
