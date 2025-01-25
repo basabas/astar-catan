@@ -43,9 +43,8 @@ namespace Bas.Catan.PathFinding
 				_fScore.Add(start, _hScore[start]);
 				_open.Push(start);
 
-				IAStarNode current, from = null;
+				IAStarNode current = null;
 				float tentativeGScore;
-				bool tentativeIsBetter;
 
 				while(_open.Count > 0)
 				{
@@ -57,42 +56,19 @@ namespace Bas.Catan.PathFinding
 					}
 					_closed.Add(current);
 
-					if(current != start)
+					foreach(IAStarNode neighbour in current.Neighbours)
 					{
-						from = _cameFrom[current];
-					}
-					foreach(IAStarNode next in current.Neighbours)
-					{
-						if(from != next && !_closed.Contains(next))
-						{
-							tentativeGScore = _gScore[current] + current.CostTo(next);
-							tentativeIsBetter = true;
-
-							if(!_open.Contains(next))
-							{
-								_cameFrom[next] = current;
-								_hScore[next] = next.EstimatedCostTo(goal);
-								_gScore[next] = tentativeGScore;
-								_fScore[next] = _gScore[next] + _hScore[next];
-								_open.Push(next);
-								continue;
-							}
-							else if(tentativeGScore >= _gScore[next])
-							{
-								tentativeIsBetter = false;
-							}
-
-							if(tentativeIsBetter)
-							{
-								_cameFrom[next] = current;
-								_hScore[next] = next.EstimatedCostTo(goal);
-								_gScore[next] = tentativeGScore;
-								_fScore[next] = _gScore[next] + _hScore[next];
-								_open.Remove(next);
-								_open.Push(next);
-							}
-						}
-					}
+                        tentativeGScore = _gScore[current] + current.CostTo(neighbour);
+                        if (!_gScore.ContainsKey(neighbour) || tentativeGScore < _gScore[neighbour])
+                        {
+                            _cameFrom[neighbour] = current;
+							float hScore = neighbour.EstimatedCostTo(goal);
+							_hScore[neighbour] = hScore;
+                            _gScore[neighbour] = tentativeGScore;
+                            _fScore[neighbour] = tentativeGScore + hScore;
+                            _open.Push(neighbour);
+                        }
+                    }
 				}
 			}
 			return false;

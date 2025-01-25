@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace Bas.Catan.PathFinding
 {
-	public class AStarNode : IAStarNode
+    public class AStarNode : IAStarNode
 	{
-		public IEnumerable<IAStarNode> Neighbours { get; private set; }
+		public IEnumerable<IAStarNode> Neighbours { get; }
 
-		public NodeInfo NodeInfo { get; private set; }
-		public Vector2Int ArrayIndex { get; private set; }
+		public NodeInfo NodeInfo { get; }
+		public Vector2Int ArrayIndex { get; }
 		public bool HighLighted { get; private set; }
 
 		public AStarNode(NodeInfo nodeInfo, Vector2Int arrayIndex, IEnumerable<IAStarNode> neighbours)
@@ -20,12 +20,9 @@ namespace Bas.Catan.PathFinding
 			Neighbours = neighbours;
 		}
 
-		public float CostTo(IAStarNode neighbour)
-		{
-			return neighbour is AStarNode node ? node.NodeInfo.TravelCost : int.MaxValue;
-		}
+        public float CostTo(IAStarNode neighbour) => neighbour is AStarNode node ? node.NodeInfo.TravelCost : int.MaxValue;
 
-		public float EstimatedCostTo(IAStarNode goal)
+        public float EstimatedCostTo(IAStarNode goal)
 		{
 			if(goal is AStarNode goalNode)
 			{
@@ -45,9 +42,6 @@ namespace Bas.Catan.PathFinding
 			return float.MaxValue;
 		}
 
-		public void HighLight(bool highLight = true)
-		{
-			HighLighted = highLight;
-		}
-	}
+		public void HighLight(bool highLight = true) => HighLighted = highLight;
+    }
 }

@@ -37,13 +37,20 @@ namespace Bas.Catan.Collections
 		/// <param name="item"></param>
 		public void Push(T item)
 		{
-			if(Count == _heap.Length)
+			if(_indexDictionary.TryGetValue(item, out int index))
 			{
-				Array.Resize(ref _heap, _heap.Length * 2);
+				ShiftUp(index);
 			}
-			_heap[Count] = item;
-			ShiftUp(Count);
-			Count++;
+			else
+			{
+				if (Count == _heap.Length)
+				{
+					Array.Resize(ref _heap, _heap.Length * 2);
+				}
+				_heap[Count] = item;
+				ShiftUp(Count);
+				Count++;
+            }
 		}
 
 		/// <summary>
@@ -107,9 +114,7 @@ namespace Bas.Catan.Collections
 		/// <param name="index2"></param>
 		private void Swap(int index1, int index2)
 		{
-			T temp = _heap[index1];
-			_heap[index1] = _heap[index2];
-			_heap[index2] = temp;
+			(_heap[index1], _heap[index2]) = (_heap[index2], _heap[index1]);
 
 			_indexDictionary[_heap[index1]] = index1;
 			_indexDictionary[_heap[index2]] = index2;
@@ -130,30 +135,10 @@ namespace Bas.Catan.Collections
 			return _isMaxHeap ? -value : value;
 		}
 
-		public void Remove(T item)
-		{
-			if(_indexDictionary.TryGetValue(item, out int index))
-			{
-				Count--;
-				_heap[index] = _heap[Count];
-				ShiftDown(index);
-				_indexDictionary.Remove(item);
-			}
-			else
-			{
-				Debug.LogError("Item was not in the dictionary");
-			}
-		}
-
 		public void Clear()
 		{
 			_indexDictionary.Clear();
 			Count = 0;
 		}
-
-		public bool Contains(T next)
-		{
-			return _indexDictionary.ContainsKey(next);
-		}
-	}
+    }
 }

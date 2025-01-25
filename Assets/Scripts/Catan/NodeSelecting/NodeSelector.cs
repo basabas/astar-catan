@@ -78,15 +78,17 @@ namespace Bas.Catan.NodeSelecting
 			return node != null && node.NodeInfo.TravelCost > 0;
 		}
 
-		public void Reset(bool unHighlight = true)
+        public void ResetHighLight()
+        {
+            _start?.HighLight(false);
+            _end?.HighLight(false);
+        }
+
+		public void Reset()
 		{
-			if(unHighlight)
-			{
-				_start?.HighLight(false);
-				_end?.HighLight(false);
-			}
 			_start = _end = null;
-			ChangeTarget(true);
+            ResetHighLight();
+            ChangeTarget(true);
 		}
 
 		public bool TryGetStartAndEnd(out AStarNode start, out AStarNode end)
@@ -96,9 +98,6 @@ namespace Bas.Catan.NodeSelecting
 			return _start != null && _end != null;
 		}
 
-		public void Dispose()
-		{
-			_inputHandler.Dispose();
-		}
-	}
+		public void Dispose() => _inputHandler.Dispose();
+    }
 }

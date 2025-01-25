@@ -9,23 +9,25 @@ namespace Bas.Catan.PathFinding
 	[System.Serializable]
 	public class PathFinder
 	{
-		[SerializeField] private Toggle _improvedAStarToggle;
+		public bool ImprovedAStart => _improvedAStarToggle.isOn;
+
+        [SerializeField] private Toggle _improvedAStarToggle;
 
 		private readonly AStar _astar = new AStar();
 		private readonly List<AStarNode> _result = new List<AStarNode>();
 
-		public bool FindPath(AStarNode start, AStarNode end)
+		public List<AStarNode> FindPath(AStarNode start, AStarNode end)
 		{
 			Clear();
 
 			if(TryGetPath(start, end, out IList<IAStarNode> result))
 			{
 				_result.AddRange(result.Select(node => node as AStarNode));
-				_result.ToList().ForEach(node => node.HighLight());
-				return true;
+				return _result;
 			}
-			return false;
-		}
+
+            return Enumerable.Empty<AStarNode>().ToList();
+        }
 
 		private bool TryGetPath(AStarNode start, AStarNode end, out IList<IAStarNode> astarResult)
 		{

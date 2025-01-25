@@ -1,5 +1,5 @@
 {
-    "name": "whac-a-mole",
+    "name": "AStarInput",
     "maps": [
         {
             "name": "Player",
@@ -11,7 +11,8 @@
                     "id": "6f301f00-555c-4dd9-9a13-3af1b7747e15",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -82,7 +83,8 @@
                     "id": "c26d5755-1305-45de-a522-f61274f9aa6f",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Submit",
@@ -90,7 +92,8 @@
                     "id": "11bd6dc6-c201-4b3b-971e-5ef1bc00d5c1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -98,7 +101,8 @@
                     "id": "9d414db4-b868-4c6b-9519-097adbd74c41",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Point",
@@ -106,7 +110,8 @@
                     "id": "220724c4-e4d2-4808-9cb2-158bcfbb32c8",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Click",
@@ -114,7 +119,8 @@
                     "id": "3c3febca-4251-4514-8031-7dcfdcb2609e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "ScrollWheel",
@@ -122,7 +128,8 @@
                     "id": "470e3ed8-d537-4cc0-b98f-71c397792c8a",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "MiddleClick",
@@ -130,7 +137,8 @@
                     "id": "d7416d89-c5b8-46d7-93a3-f80777f36ae9",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "RightClick",
@@ -138,7 +146,8 @@
                     "id": "6ceeffa4-b361-4cc4-9dcc-93464bdf4fa2",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TrackedDevicePosition",
@@ -146,7 +155,8 @@
                     "id": "6094b8a3-95ee-478b-b75e-4bda09485ae4",
                     "expectedControlType": "Vector3",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TrackedDeviceOrientation",
@@ -154,7 +164,8 @@
                     "id": "16fe30f0-4dbe-4029-99be-bca9749bd4e7",
                     "expectedControlType": "Quaternion",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

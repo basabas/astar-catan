@@ -12,10 +12,10 @@ namespace Bas.Catan.Input
 		public InputHandler(Action<Vector2> onClickAction)
 		{
 			_onScreenClickAction = onClickAction;
-			Object.FindObjectOfType<PlayerInput>().onActionTriggered += OnInputActionCallBack;
+			Object.FindFirstObjectByType<PlayerInput>().onActionTriggered += OnInputActionCallBack;
 		}
 
-		public void OnInputActionCallBack(InputAction.CallbackContext context)
+		private void OnInputActionCallBack(InputAction.CallbackContext context)
 		{
 			if(context.phase == InputActionPhase.Started)
 			{
@@ -25,7 +25,7 @@ namespace Bas.Catan.Input
 
 		public void Dispose()
 		{
-			PlayerInput input = Object.FindObjectOfType<PlayerInput>();
+			PlayerInput input = Object.FindFirstObjectByType<PlayerInput>();
 			if(input != null)
 			{
 				input.onActionTriggered -= OnInputActionCallBack;
