@@ -11,7 +11,7 @@ namespace Bas.Catan.PathFinding
 		private readonly Dictionary<IAStarNode, float> _gScore;
 		private readonly Dictionary<IAStarNode, float> _hScore;
 		private readonly Dictionary<IAStarNode, float> _fScore;
-		private readonly OpenSorter _sorter;
+		private readonly AStarComparer _sorter;
 		private readonly Heap<IAStarNode> _open;
 
 		public AStar()
@@ -21,7 +21,7 @@ namespace Bas.Catan.PathFinding
 			_gScore = new Dictionary<IAStarNode, float>();
 			_hScore = new Dictionary<IAStarNode, float>();
 			_fScore = new Dictionary<IAStarNode, float>();
-			_sorter = new OpenSorter(_fScore);
+			_sorter = new AStarComparer(_fScore);
 			_open = new Heap<IAStarNode>(1024, _sorter);
 		}
 
@@ -45,8 +45,10 @@ namespace Bas.Catan.PathFinding
 
 				IAStarNode current;
 				float tentativeGScore;
+				float currentGScore;
+				float hScore;
 
-				while(_open.Count > 0)
+                while (_open.Count > 0)
 				{
 					current = _open.Pop();
 					if(current == goal)
@@ -56,17 +58,19 @@ namespace Bas.Catan.PathFinding
 					}
 					_closed.Add(current);
 
-					foreach(IAStarNode neighbour in current.Neighbours)
+					currentGScore = _gScore[current];
+
+                    foreach (IAStarNode neighbour in current.Neighbours)
 					{
 						if (_closed.Contains(neighbour))
 						{
 							continue;
 						}
-                        tentativeGScore = _gScore[current] + current.CostTo(neighbour);
+                        tentativeGScore = currentGScore + current.CostTo(neighbour);
                         if (!_gScore.TryGetValue(neighbour, out float neighborGScore) || tentativeGScore < neighborGScore)
                         {
                             _cameFrom[neighbour] = current;
-							float hScore = neighbour.EstimatedCostTo(goal);
+							hScore = neighbour.EstimatedCostTo(goal);
 							_hScore[neighbour] = hScore;
                             _gScore[neighbour] = tentativeGScore;
                             _fScore[neighbour] = tentativeGScore + hScore;

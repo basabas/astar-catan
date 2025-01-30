@@ -14,7 +14,7 @@ namespace Bas.Catan.Collections
 
         private readonly Dictionary<T, int> _indexDictionary;
         private readonly IComparer<T> _comparer;
-        private readonly bool _isMaxHeap;
+        private readonly int _isMaxHeap;
         private T[] _heap;
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Bas.Catan.Collections
         {
             _indexDictionary = new Dictionary<T, int>();
             _comparer = comparer ?? Comparer<T>.Default;
-            _isMaxHeap = isMaxHeap;
+            _isMaxHeap = isMaxHeap ? 1 : -1;
             _heap = new T[(int) Math.Pow(2, Math.Ceiling(Math.Log(minSize, 2)))];
         }
 
@@ -77,7 +77,7 @@ namespace Bas.Catan.Collections
             while (heapIndex > 0)
             {
                 int parentIndex = (heapIndex - 1) / 2;
-                if (Compare(item, _heap[parentIndex]) >= 0)
+                if (Compare(item, _heap[parentIndex]))
                 {
                     break;
                 }
@@ -102,8 +102,8 @@ namespace Bas.Catan.Collections
                 int child1 = heapIndex * 2 + 1;
                 if (child1 >= count) break;
                 int child2 = child1 + 1;
-                int preferredChildIndex = (child2 >= count || Compare(_heap[child1], _heap[child2]) <= 0) ? child1 : child2;
-                if (Compare(item, _heap[preferredChildIndex]) <= 0) break;
+                int preferredChildIndex = (child2 >= count || !Compare(_heap[child1], _heap[child2])) ? child1 : child2;
+                if (!Compare(item, _heap[preferredChildIndex])) break;
                 _heap[heapIndex] = _heap[preferredChildIndex];
                 _indexDictionary[_heap[heapIndex]] = heapIndex;
                 heapIndex = preferredChildIndex;
@@ -119,11 +119,7 @@ namespace Bas.Catan.Collections
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        private int Compare(T x, T y)
-        {
-            int value = _comparer.Compare(x, y);
-            return _isMaxHeap ? -value : value;
-        }
+        private bool Compare(T x, T y) => _comparer.Compare(x, y) != _isMaxHeap;
 
         public void Clear()
         {

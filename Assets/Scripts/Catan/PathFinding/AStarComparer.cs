@@ -1,13 +1,14 @@
 ﻿using Pathing;
 using System.Collections.Generic;
+using Bas.Catan.Collections;
 
 namespace Bas.Catan.PathFinding
 {
-	internal class OpenSorter : IComparer<IAStarNode>
+	internal class AStarComparer : IComparer<IAStarNode>
 	{
 		private readonly Dictionary<IAStarNode, float> _fScore;
 
-		public OpenSorter(Dictionary<IAStarNode, float> fScore)
+		public AStarComparer(Dictionary<IAStarNode, float> fScore)
 		{
 			_fScore = fScore;
 		}
